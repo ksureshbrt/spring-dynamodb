@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    aws:
+      credentials:
+        access-key: test
+        secret-key: test
+      region:
+        static: us-east-1
+      dynamodb:
+        region: us-east-1
+      s3:
+        region: us-east-1
+
+app:
+  dynamodb:
+    initialize-schema: false
+  s3:
+    bucket: test-bucket
+    initialize-bucket: false

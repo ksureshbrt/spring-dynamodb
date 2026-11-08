@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: "spring-dynamodb"
+  cloud:
+    aws:
+      dynamodb:
+        region: "us-east-1"
+        # endpoint: http://localhost:8000
+      s3:
+        region: "us-east-1"
+        # endpoint: http://localhost:4566
+        # path-style-access-enabled: true
+      credentials:
+        access-key: ${AWS_ACCESS_KEY}
+        secret-key: ${AWS_SECRET_KEY}
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+app:
+  dynamodb:
+    initialize-schema: true
+  s3:
+    bucket: ${S3_BUCKET:spring-dynamodb-files-763103708414-us-east-1-an}
+    initialize-bucket: true
+
+server:
+  port: 8080
