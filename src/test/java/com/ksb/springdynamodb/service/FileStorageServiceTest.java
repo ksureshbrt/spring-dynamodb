@@ -216,7 +216,7 @@ class FileStorageServiceTest {
     }
 
     private static NoSuchKeyException noSuchKey() {
-        return (NoSuchKeyException) NoSuchKeyException.builder().statusCode(404).message("missing").build();
+        return NoSuchKeyException.builder().statusCode(404).message("missing").build();
     }
 
     private static MockMultipartFile file(String filename, String contentType) {
