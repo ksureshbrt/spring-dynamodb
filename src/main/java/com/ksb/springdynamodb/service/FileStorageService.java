@@ -67,12 +67,17 @@ public class FileStorageService {
 
     public FileDownload download(String key) {
         String normalizedKey = normalizeKey(key);
-        ResponseInputStream<GetObjectResponse> content = callForKey(normalizedKey, () -> s3Client.getObject(GetObjectRequest.builder()
-                .bucket(properties.bucket())
-                .key(normalizedKey)
-                .build()));
+        ResponseInputStream<GetObjectResponse> content = callForKey(normalizedKey,
+                () -> {
+                    System.out.println("Getting object from S3");
+                    return s3Client.getObject(GetObjectRequest.builder()
+                            .bucket(properties.bucket())
+                            .key(normalizedKey)
+                            .build());
+                });
         GetObjectResponse response = content.response();
-        FileMetadata metadata = new FileMetadata(normalizedKey, response.contentLength(), response.contentType(), response.lastModified());
+        FileMetadata metadata = new FileMetadata(normalizedKey, response.contentLength(), response.contentType(),
+                response.lastModified());
         return new FileDownload(metadata, content);
     }
 

@@ -36,6 +36,7 @@ public class FileController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FileMetadata> upload(@RequestPart("file") MultipartFile file,
                                                @RequestParam(required = false) String key) {
+        key = file.getOriginalFilename();
         FileMetadata uploaded = fileStorageService.upload(key, file);
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{key}")
